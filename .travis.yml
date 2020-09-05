@@ -1,0 +1,6 @@
+language: java
+
+# cache the build tool's caches
+cache:
+  directories:
+  - $HOME/.m2
