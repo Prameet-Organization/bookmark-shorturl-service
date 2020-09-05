@@ -1,10 +1,10 @@
-package com.hackathon.bookmarkshorturlservice;
+package com.hackathon.bookmarkshorturl;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BookmarkShorturlServiceApplicationTests {
+class BookmarkShorturlApplicationTests {
 
 	@Test
 	void contextLoads() {

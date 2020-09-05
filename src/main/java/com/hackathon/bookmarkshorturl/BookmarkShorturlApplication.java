@@ -1,13 +1,13 @@
-package com.hackathon.bookmarkshorturlservice;
+package com.hackathon.bookmarkshorturl;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BookmarkShorturlServiceApplication {
+public class BookmarkShorturlApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BookmarkShorturlServiceApplication.class, args);
+		SpringApplication.run(BookmarkShorturlApplication.class, args);
 	}
 
 }
