@@ -28,7 +28,7 @@ class UrlControllerTest {
     protected ObjectMapper objectMapper;
 
 	@Test
-	void whenValidInput_thenReturns200() throws Exception {
+	void whenValidInputThenReturns200() throws Exception {
 		LongUrlRequest request = new LongUrlRequest(new URL("http://test.com"));
 		
 		mockMvc.perform(post("/api/v1/create-short-url")

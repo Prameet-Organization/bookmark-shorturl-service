@@ -3,7 +3,7 @@ package com.hackathon.bookmarkshorturl.dto;
 import java.net.URL;
 
 public class LongUrlRequest {
-	URL url;
+	private URL url;
 	
 	public LongUrlRequest() {
 	}
