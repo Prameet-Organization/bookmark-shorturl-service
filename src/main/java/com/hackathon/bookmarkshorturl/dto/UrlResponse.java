@@ -2,13 +2,14 @@ package com.hackathon.bookmarkshorturl.dto;
 
 import java.net.URL;
 
-public class LongUrlRequest {
+public class UrlResponse {
 	private URL url;
-	
-	public LongUrlRequest() {
+
+	public UrlResponse() {
+		super();
 	}
 
-	public LongUrlRequest(URL url) {
+	public UrlResponse(URL url) {
 		this.url = url;
 	}
 
@@ -19,4 +20,6 @@ public class LongUrlRequest {
 	public void setUrl(URL url) {
 		this.url = url;
 	}
+	
+	
 }
