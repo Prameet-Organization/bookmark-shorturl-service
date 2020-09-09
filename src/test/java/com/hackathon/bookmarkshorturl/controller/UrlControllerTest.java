@@ -36,7 +36,7 @@ class UrlControllerTest {
 
 	@Test
 	void whenValidInputThenReturns200() throws Exception {
-		UrlRequest request = new UrlRequest(new URL("http://test.com"));
+		UrlRequest request = new UrlRequest();
 		when(this.urlService.convertToShortUrl(any(UrlRequest.class))).thenReturn("abc");
 		this.mockMvc.perform(post("/api/v1/create-short-url")
 				.contentType(MediaType.APPLICATION_JSON)
