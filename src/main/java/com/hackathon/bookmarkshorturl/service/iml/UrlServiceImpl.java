@@ -1,6 +1,6 @@
 package com.hackathon.bookmarkshorturl.service.iml;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -26,7 +26,8 @@ public class UrlServiceImpl implements UrlService {
 	public String convertToShortUrl(UrlRequest request) {
         var url = new Url();
         url.setLongUrl(request.getUrl().toString());
-        url.setCreatedDate(new Date());
+        url.setCreatedDateTime(LocalDateTime.now());
+        url.setExpirationDateTime(request.getExpirationDateTime());
         var entity = this.urlRepository.save(url);
 
         return this.urlConversionService.encode(entity.getId());
@@ -38,7 +39,7 @@ public class UrlServiceImpl implements UrlService {
         var entity = urlRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("There is no entity with " + pathName));
 
-        if (entity.getExpiresDate() != null && entity.getExpiresDate().before(new Date())){
+        if (entity.getExpirationDateTime() != null && entity.getExpirationDateTime().isBefore(LocalDateTime.now())){
             this.urlRepository.delete(entity);
             throw new EntityNotFoundException("Link expired!");
         }

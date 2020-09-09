@@ -22,23 +22,25 @@ import com.hackathon.bookmarkshorturl.service.UrlService;
 @RestController
 @CrossOrigin("http://localhost:4200")
 public class UrlController {
-	
+
 	@Autowired
 	private UrlService urlService;
-	
-	@PostMapping("/api/v1/create-short-url")
-    public ResponseEntity<UrlResponse> createShortUrl(@RequestBody UrlRequest request) throws MalformedURLException {
 
-		if(request != null && request.getUrl() != null) {
-			var shortUrl = this.urlService.convertToShortUrl(request);
-			var entity = new UrlResponse(
-					new URL(ServletUriComponentsBuilder.fromCurrentContextPath().toUriString()+"/"+shortUrl)
-					);
-	        return new ResponseEntity<>(entity, HttpStatus.OK);
+	@PostMapping("/api/v1/create-short-url")
+	public ResponseEntity<UrlResponse> createShortUrl(@RequestBody UrlRequest request) throws MalformedURLException {
+		
+		if(request != null && request.getUrl() != null) { 
+			var shortUrl =
+				this.urlService.convertToShortUrl(request); 
+			var entity = new UrlResponse( new
+						URL(ServletUriComponentsBuilder.fromCurrentContextPath().toUriString()+"/"+
+								shortUrl) ); 
+			return new ResponseEntity<>(entity, HttpStatus.OK); 
 		}
+
 		return new ResponseEntity<>(new UrlResponse(), HttpStatus.BAD_REQUEST);
-    }
-	
+	}
+
 	@GetMapping("/{pathName}")
 	public RedirectView getOriginalUrl(@PathVariable String pathName){
 		return new RedirectView(this.urlService.getOriginalUrl(pathName));

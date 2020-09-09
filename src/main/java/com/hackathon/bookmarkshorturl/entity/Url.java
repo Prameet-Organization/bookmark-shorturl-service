@@ -1,7 +1,11 @@
 package com.hackathon.bookmarkshorturl.entity;
 
-import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "url")
@@ -14,9 +18,9 @@ public class Url {
     private String longUrl;
 
     @Column(nullable = false)
-    private Date createdDate;
+    private LocalDateTime createdDateTime;
 
-    private Date expiresDate;
+    private LocalDateTime expirationDateTime;
 
 
     public long getId() {
@@ -36,19 +40,20 @@ public class Url {
         this.longUrl = longUrl;
     }
 
-    public Date getCreatedDate() {
-        return createdDate;
-    }
+	public LocalDateTime getCreatedDateTime() {
+		return createdDateTime;
+	}
 
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
+	public void setCreatedDateTime(LocalDateTime createdDateTime) {
+		this.createdDateTime = createdDateTime;
+	}
 
-    public Date getExpiresDate() {
-        return expiresDate;
-    }
+	public LocalDateTime getExpirationDateTime() {
+		return expirationDateTime;
+	}
 
-    public void setExpiresDate(Date expireDate) {
-        this.expiresDate = expireDate;
-    }
+	public void setExpirationDateTime(LocalDateTime expirationDateTime) {
+		this.expirationDateTime = expirationDateTime;
+	}
+
 }
