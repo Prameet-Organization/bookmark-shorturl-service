@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 @Entity
@@ -14,13 +15,25 @@ public class Url {
     @Id
     private long id = System.currentTimeMillis()-1599556275803l;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 4000, updatable = false)
     private String longUrl;
 
-    @Column(nullable = false)
+    @Column(nullable = false, updatable = false)
     private LocalDateTime createdDateTime;
 
     private LocalDateTime expirationDateTime;
+    
+	private String shortTitle;
+	
+	@Column(length = 4000)
+	private String description;
+	
+	private String faviconFileName;
+
+    private String faviconFileType;
+
+    @Lob
+    private byte[] faviconData;
 
 
     public long getId() {
@@ -54,6 +67,46 @@ public class Url {
 
 	public void setExpirationDateTime(LocalDateTime expirationDateTime) {
 		this.expirationDateTime = expirationDateTime;
+	}
+
+	public String getShortTitle() {
+		return shortTitle;
+	}
+
+	public void setShortTitle(String shortTitle) {
+		this.shortTitle = shortTitle;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getFileName() {
+		return faviconFileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.faviconFileName = fileName;
+	}
+
+	public String getFileType() {
+		return faviconFileType;
+	}
+
+	public void setFileType(String fileType) {
+		this.faviconFileType = fileType;
+	}
+
+	public byte[] getFaviconData() {
+		return faviconData;
+	}
+
+	public void setFaviconData(byte[] faviconData) {
+		this.faviconData = faviconData;
 	}
 
 }

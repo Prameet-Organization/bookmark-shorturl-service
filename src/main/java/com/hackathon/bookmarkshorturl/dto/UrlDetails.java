@@ -3,9 +3,11 @@ package com.hackathon.bookmarkshorturl.dto;
 import java.net.URL;
 import java.time.LocalDateTime;
 
-public class UrlRequest {
+public class UrlDetails {
 	private URL url;
 	private LocalDateTime expirationDateTime;
+	private String shortTitle;
+	private String description;
 
 	public URL getUrl() {
 		return url;
@@ -23,8 +25,22 @@ public class UrlRequest {
 		this.expirationDateTime = expirationDateTime;
 	}
 
-	@Override
-	public String toString() {
-		return "UrlRequest [url=" + url + ", expirationDateTime=" + expirationDateTime + "]";
+	public String getShortTitle() {
+		return shortTitle;
 	}
+
+	public void setShortTitle(String shortTitle) {
+		this.shortTitle = shortTitle;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	
+	
 }
