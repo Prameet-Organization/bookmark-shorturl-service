@@ -13,7 +13,9 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import com.hackathon.bookmarkshorturl.entity.User;
 
 public class UserPrincipal implements OAuth2User, UserDetails {
-    private Long id;
+
+	private static final long serialVersionUID = 3547341942055359749L;
+	private Long id;
     private String email;
     private String password;
     private Collection<? extends GrantedAuthority> authorities;

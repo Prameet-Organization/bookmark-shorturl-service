@@ -4,7 +4,7 @@ spring:
         driver-class-name: org.h2.Driver
         password: ''
         platform: h2
-        url: jdbc:h2:file:/home/prameet/testDb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false
+        url: jdbc:h2:file:/home/circleci/testDb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false
     h2:
         console:
             enabled: true
@@ -20,8 +20,8 @@ spring:
         client:
           registration:
             github:
-              clientId: 280eae0a75d16aa0cbfb
-              clientSecret: 51adda56b7f133bab716e08f1ad833b2d3e94d8c
+              clientId: 
+              clientSecret: 
               redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
               scope:
                 - user

@@ -3,7 +3,10 @@ package com.hackathon.bookmarkshorturl.exception;
 import org.springframework.security.core.AuthenticationException;
 
 public class OAuth2AuthenticationProcessingException extends AuthenticationException {
-    public OAuth2AuthenticationProcessingException(String msg, Throwable t) {
+   
+	private static final long serialVersionUID = 1715911935798760385L;
+
+	public OAuth2AuthenticationProcessingException(String msg, Throwable t) {
         super(msg, t);
     }
 
