@@ -4,13 +4,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -18,9 +16,9 @@ import com.hackathon.bookmarkshorturl.dto.UrlDto;
 import com.hackathon.bookmarkshorturl.entity.Url;
 import com.hackathon.bookmarkshorturl.entity.User;
 import com.hackathon.bookmarkshorturl.repository.UrlRepository;
-import com.hackathon.bookmarkshorturl.repository.UserRepository;
 import com.hackathon.bookmarkshorturl.service.UrlConversionService;
 import com.hackathon.bookmarkshorturl.service.UrlService;
+import com.hackathon.bookmarkshorturl.service.UserService;
 
 @Service
 public class UrlServiceImpl implements UrlService {
@@ -32,24 +30,11 @@ public class UrlServiceImpl implements UrlService {
     private UrlConversionService urlConversionService;
 	
 	@Autowired
-	private UserRepository userRepository;
-
-	private String getUsername() {
-		String username;
-		Optional<User> user = Optional.empty();
-    	if(SecurityContextHolder.getContext().getAuthentication() != null) {
-    		 username = SecurityContextHolder.getContext().getAuthentication().getName();
-    		 user = this.userRepository.findByEmail(username);
-    	}
-    	if(user.isPresent()) {
-    		return user.get().getName();
-    	}
-    	return null;
-	}
+	private UserService userService;
 	
     @Override
 	public String convertToShortUrl(Url urlObj) {
-    	urlObj.setCreatorName(this.getUsername());
+    	urlObj.setCreator(this.userService.getUser());
     	var entity = this.urlRepository.save(urlObj);
 
         return this.urlConversionService.encode(entity.getId());
@@ -61,11 +46,11 @@ public class UrlServiceImpl implements UrlService {
         var entity = urlRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("There is no entity with " + pathName));
 
-        if (entity.getCreatorName() == null && entity.getExpirationDateTime() != null && entity.getExpirationDateTime().isBefore(LocalDateTime.now())){
+        if (entity.getCreator() == null && entity.getExpirationDateTime() != null && entity.getExpirationDateTime().isBefore(LocalDateTime.now())){
             this.urlRepository.delete(entity);
             throw new EntityNotFoundException("Link expired!");
         }
-        if(entity.getCreatorName() != null) {
+        if(entity.getCreator() != null) {
         	throw new EntityNotFoundException("Invalid Url!");
         }
 
@@ -77,14 +62,14 @@ public class UrlServiceImpl implements UrlService {
         var id = this.urlConversionService.decode(pathName);
         var entity = urlRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("There is no entity with " + pathName));
-        if (entity.getCreatorName().equals(username)
+        if (entity.getCreator().getName().equals(username)
         		&& entity.getExpirationDateTime() != null
         		&& entity.getExpirationDateTime().isBefore(LocalDateTime.now())){
             this.urlRepository.delete(entity);
             throw new EntityNotFoundException("Link expired!");
         }
         
-        if(!entity.getCreatorName().equals(username)) {
+        if(!entity.getCreator().getName().equals(username)) {
         	throw new EntityNotFoundException("Invalid Url!");
         }
         return entity.getLongUrl();
@@ -92,13 +77,13 @@ public class UrlServiceImpl implements UrlService {
     
     @Override
     public List<UrlDto> getUrls(){
-    	final String username = this.getUsername();
-    	List<Url> urls = this.urlRepository.findByCreatorName(this.getUsername());
+    	final User user = this.userService.getUser();
+    	List<Url> urls = this.urlRepository.findByCreator(user);
     	return urls.stream().map(url -> {
 			try {
 				return UrlDto.build(url).setShortUrl(new
 						URL(ServletUriComponentsBuilder.fromCurrentContextPath().toUriString()+"/"+
-								username+"/"+this.urlConversionService.encode(url.getId())));
+								user.getName()+"/"+this.urlConversionService.encode(url.getId())));
 			} catch (MalformedURLException e) {
 				return null;
 			}

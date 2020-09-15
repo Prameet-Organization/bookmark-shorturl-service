@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -25,14 +26,15 @@ public class Url {
     
 	private String shortTitle;
 	
-	private String creatorName;
-	
 	@Column(length = 4000)
 	private String description;
 	
 	private String faviconFileName;
 
     private String faviconFileType;
+    
+    @OneToOne
+    private User creator;
 
     @Lob
     private byte[] faviconData;
@@ -111,16 +113,18 @@ public class Url {
 		this.faviconData = faviconData;
 	}
 
-	public String getCreatorName() {
-		return creatorName;
-	}
-
-	public void setCreatorName(String creatorName) {
-		this.creatorName = creatorName;
-	}
-
 	public String getFaviconFileName() {
 		return faviconFileName;
+	}
+
+	public User getCreator() {
+		return creator;
+	}
+
+	public void setCreator(User creator) {
+		this.creator = creator;
 	}	
+	
+	
 
 }
