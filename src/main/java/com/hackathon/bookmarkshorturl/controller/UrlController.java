@@ -44,7 +44,11 @@ public class UrlController {
 		  if(url != null) { 
 			  Url urlObj = new Url();
 			  urlObj.setLongUrl(url.toString());
-			  urlObj.setExpirationDateTime(expirationDateTime);
+			  if(expirationDateTime != null) {
+				  urlObj.setExpirationDateTime(expirationDateTime);
+			  }else {
+				  urlObj.setExpirationDateTime(LocalDateTime.now().plusDays(1));
+			  }
 			  urlObj.setCreatedDateTime(LocalDateTime.now());
 			  urlObj.setShortTitle(shortTitle);
 			  urlObj.setDescription(description);

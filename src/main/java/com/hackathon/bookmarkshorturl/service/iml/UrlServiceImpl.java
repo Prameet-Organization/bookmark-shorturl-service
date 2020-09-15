@@ -50,7 +50,7 @@ public class UrlServiceImpl implements UrlService {
     @Override
 	public String convertToShortUrl(Url urlObj) {
     	urlObj.setCreatorName(this.getUsername());
-        var entity = this.urlRepository.save(urlObj);
+    	var entity = this.urlRepository.save(urlObj);
 
         return this.urlConversionService.encode(entity.getId());
     }
