@@ -25,6 +25,8 @@ public class Url {
     
 	private String shortTitle;
 	
+	private String creatorName;
+	
 	@Column(length = 4000)
 	private String description;
 	
@@ -108,5 +110,17 @@ public class Url {
 	public void setFaviconData(byte[] faviconData) {
 		this.faviconData = faviconData;
 	}
+
+	public String getCreatorName() {
+		return creatorName;
+	}
+
+	public void setCreatorName(String creatorName) {
+		this.creatorName = creatorName;
+	}
+
+	public String getFaviconFileName() {
+		return faviconFileName;
+	}	
 
 }

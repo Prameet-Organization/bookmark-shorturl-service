@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import org.springframework.web.servlet.view.RedirectView;
 
 import com.hackathon.bookmarkshorturl.dto.UrlDto;
 import com.hackathon.bookmarkshorturl.dto.UrlResponse;
@@ -26,14 +26,13 @@ import com.hackathon.bookmarkshorturl.entity.Url;
 import com.hackathon.bookmarkshorturl.service.UrlService;
 
 @RestController
-//@CrossOrigin(origins = "http://localhost:4200", 
-	//methods = {RequestMethod.GET, RequestMethod.PUT, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.OPTIONS, RequestMethod.PATCH})
+@RequestMapping("/api/v1")
 public class UrlController { 
 
 	@Autowired
 	private UrlService urlService;
 
-	@PostMapping("/api/v1/short-urls")
+	@PostMapping("short-urls")
 	public ResponseEntity<UrlResponse> createShortUrl(@RequestParam(value="favicon", required = false) MultipartFile favicon,
 					URL url,
 					@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
@@ -63,18 +62,13 @@ public class UrlController {
 
 		return new ResponseEntity<>(new UrlResponse(), HttpStatus.BAD_REQUEST);
 	}
-
-	@GetMapping("/{pathName}")
-	public RedirectView getOriginalUrl(@PathVariable String pathName){
-		return new RedirectView(this.urlService.getOriginalUrl(pathName));
-	}
 	
-	@GetMapping("/api/v1/short-urls")
+	@GetMapping("short-urls")
 	public ResponseEntity<List<UrlDto>> getUrls(){
 		return new ResponseEntity<>(this.urlService.getUrls(), HttpStatus.OK);
 	}
 	
-	@PutMapping("/api/v1/short-urls/{pathName}")
+	@PutMapping("short-urls/{pathName}")
 	public ResponseEntity<Void> updateShortUrl(@PathVariable String pathName,
 			@RequestParam(value="favicon", required = false) MultipartFile favicon,
 					@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
@@ -100,7 +94,7 @@ public class UrlController {
 		  return new ResponseEntity<>(HttpStatus.NO_CONTENT); 
 	}
 	
-	@DeleteMapping("/api/v1/short-urls/{pathName}")
+	@DeleteMapping("short-urls/{pathName}")
 	public ResponseEntity<Void> deleteShortUrl(@PathVariable String pathName){
 		this.urlService.delete(pathName);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT); 

@@ -3,6 +3,7 @@ package com.hackathon.bookmarkshorturl.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -110,8 +111,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.css",
                         "/**/*.js")
                         .permitAll()
-                    .antMatchers("/*","/auth/**", "/oauth2/**")
+                    .antMatchers("/h2/**","/auth/**", "/oauth2/**","/**")
                         .permitAll()
+                    .antMatchers(HttpMethod.POST,"/api/v1/short-urls")
+                    	.permitAll()
                     .anyRequest()
                         .authenticated()
                     .and()
@@ -128,7 +131,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .and()
                     .successHandler(oAuth2AuthenticationSuccessHandler)
                     .failureHandler(oAuth2AuthenticationFailureHandler);
-
+        http.headers().frameOptions().disable();
         // Add our custom Token based authentication filter
         http.addFilterBefore(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }

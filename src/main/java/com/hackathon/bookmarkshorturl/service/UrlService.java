@@ -11,6 +11,8 @@ public interface UrlService {
 
 	String getOriginalUrl(String pathName);
 	
+	String getOriginalUrl(String username, String pathName);
+	
 	List<UrlDto> getUrls();
 	
 	void update(Url urlObj, String pathName);
