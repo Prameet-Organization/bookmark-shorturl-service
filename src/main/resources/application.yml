@@ -15,3 +15,24 @@ spring:
         database-platform: org.hibernate.dialect.H2Dialect
         hibernate:
             ddl-auto: update
+    security:
+      oauth2:
+        client:
+          registration:
+            github:
+              clientId: 
+              clientSecret: 
+              redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
+              scope:
+                - user
+app:
+  auth:
+    tokenSecret: MYSCREATISTOOSECRETTOKNOW1234567
+    tokenExpirationMsec: 864000000
+  oauth2:
+    # After successfully authenticating with the OAuth2 Provider,
+    # we'll be generating an auth token for the user and sending the token to the
+    # redirectUri mentioned by the client in the /oauth2/authorize request.
+    # We're not using cookies because they won't work well in mobile clients.
+    authorizedRedirectUris:
+      - http://localhost:4200
