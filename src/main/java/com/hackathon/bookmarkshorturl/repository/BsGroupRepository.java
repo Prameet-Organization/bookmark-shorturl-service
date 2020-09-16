@@ -11,5 +11,9 @@ import com.hackathon.bookmarkshorturl.entity.BsGroup;
 public interface BsGroupRepository extends JpaRepository<BsGroup, Long> {
 	
 	List<BsGroup> findByGroupType(String type);
+	
+	List<BsGroup> findByGroupNameLikeIgnoreCase(String name);
+
+	BsGroup findByGroupName(String groupName);
 
 }

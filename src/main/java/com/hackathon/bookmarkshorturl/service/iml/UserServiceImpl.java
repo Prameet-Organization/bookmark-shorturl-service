@@ -1,5 +1,6 @@
 package com.hackathon.bookmarkshorturl.service.iml;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,11 @@ public class UserServiceImpl implements UserService {
     		return user.get();
     	}
     	return null;
+	}
+	
+	@Override
+	public List<User> getUsers(String name){
+		return this.userRepository.findByNameLikeIgnoreCase(name+"%");
 	}
 
 }

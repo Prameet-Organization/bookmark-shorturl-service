@@ -1,11 +1,12 @@
 package com.hackathon.bookmarkshorturl.entity;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -27,16 +28,22 @@ public class BsGroup {
 	private String groupName;
 
 	@OneToMany
-	private List<BsGroup> features;
+	private Set<BsGroup> features;
 	
 	@ManyToOne
 	private BsGroup tribe;
 	
 	@OneToMany
-	private List<User> teams;
+	private Set<User> teams;
 	
 	@OneToOne
 	private User admin;
+	
+	@ManyToMany
+	private Set<Url> urls;
+	
+	@ManyToMany
+	private Set<User> user;
 
 	public long getId() {
 		return id;
@@ -62,14 +69,6 @@ public class BsGroup {
 		this.groupName = groupName;
 	}
 
-	public List<BsGroup> getFeatures() {
-		return features;
-	}
-
-	public void setFeatures(List<BsGroup> features) {
-		this.features = features;
-	}
-
 	public BsGroup getTribe() {
 		return tribe;
 	}
@@ -78,21 +77,45 @@ public class BsGroup {
 		this.tribe = tribe;
 	}
 
-	public List<User> getTeams() {
-		return teams;
-	}
-
-	public void setTeams(List<User> teams) {
-		this.teams = teams;
-	}
-
+	
 	public User getAdmin() {
 		return admin;
 	}
 
 	public void setAdmin(User admin) {
 		this.admin = admin;
-	}		
-	
+	}
+
+	public Set<BsGroup> getFeatures() {
+		return features;
+	}
+
+	public void setFeatures(Set<BsGroup> features) {
+		this.features = features;
+	}
+
+	public Set<User> getTeams() {
+		return teams;
+	}
+
+	public void setTeams(Set<User> teams) {
+		this.teams = teams;
+	}
+
+	public Set<Url> getUrls() {
+		return urls;
+	}
+
+	public void setUrls(Set<Url> urls) {
+		this.urls = urls;
+	}
+
+	public Set<User> getUser() {
+		return user;
+	}
+
+	public void setUser(Set<User> user) {
+		this.user = user;
+	}
 	
 }

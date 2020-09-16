@@ -115,4 +115,9 @@ public class UrlServiceImpl implements UrlService {
     	this.urlRepository.deleteById(id);
     }
     
+    @Override
+    public Url getUrlById(long id) {
+    	return this.urlRepository.findById(id).orElseThrow();
+    }
+    
 }

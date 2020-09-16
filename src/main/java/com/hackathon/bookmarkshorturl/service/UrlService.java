@@ -19,4 +19,6 @@ public interface UrlService {
 	
 	void delete(String pathName);
 
+	Url getUrlById(long id);
+
 }
