@@ -17,7 +17,7 @@ import com.hackathon.bookmarkshorturl.repository.UserRepository;
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Override
     @Transactional

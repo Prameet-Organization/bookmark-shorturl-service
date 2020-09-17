@@ -18,8 +18,6 @@ import com.hackathon.bookmarkshorturl.dto.BsGroupDto;
 import com.hackathon.bookmarkshorturl.entity.BsGroup;
 import com.hackathon.bookmarkshorturl.service.BsGroupService;
 
-import io.swagger.annotations.ApiOperation;
-
 @RestController
 @RequestMapping("/api/v1")
 public class GroupController {
