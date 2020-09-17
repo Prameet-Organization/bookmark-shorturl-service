@@ -8,10 +8,6 @@ public class BsGroupDto {
 	
 	private String groupName;
 	
-	private String username;
-	
-	private String shortUrl;
-	
 	private BsGroupDto tribe;
 
 	public long getId() {
@@ -44,22 +40,6 @@ public class BsGroupDto {
 
 	public void setTribe(BsGroupDto tribe) {
 		this.tribe = tribe;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getShortUrl() {
-		return shortUrl;
-	}
-
-	public void setShortUrl(String shortUrl) {
-		this.shortUrl = shortUrl;
 	}
 	
 }

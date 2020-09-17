@@ -13,9 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hackathon.bookmarkshorturl.dto.AddToGroupRequest;
 import com.hackathon.bookmarkshorturl.dto.BsGroupDto;
 import com.hackathon.bookmarkshorturl.entity.BsGroup;
 import com.hackathon.bookmarkshorturl.service.BsGroupService;
+
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -43,11 +46,11 @@ public class GroupController {
 	}
 	
 	@PostMapping("groups/{groupname}")
-	public ResponseEntity<Void> create(@PathVariable String groupname, @RequestBody BsGroupDto bsGroupDto){
-		if(bsGroupDto.getUsername() != null) {
-			this.bsGroupService.addUserToGroup(groupname, bsGroupDto.getUsername());
-		}else if(bsGroupDto.getShortUrl() != null) {
-			this.bsGroupService.addUrlToGroup(groupname, bsGroupDto.getShortUrl());
+	public ResponseEntity<Void> addToGroup(@PathVariable String groupname, @RequestBody AddToGroupRequest request){
+		if(request.getUsername() != null) {
+			this.bsGroupService.addUserToGroup(groupname, request.getUsername());
+		}else if(request.getShortUrl() != null) {
+			this.bsGroupService.addUrlToGroup(groupname, request.getShortUrl());
 		}
 		return new ResponseEntity<>(HttpStatus.OK);
 	}

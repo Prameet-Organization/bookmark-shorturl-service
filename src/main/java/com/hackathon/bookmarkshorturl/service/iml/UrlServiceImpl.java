@@ -82,7 +82,7 @@ public class UrlServiceImpl implements UrlService {
     	return urls.stream().map(url -> {
 			try {
 				return UrlDto.build(url).setShortUrl(new
-						URL(ServletUriComponentsBuilder.fromCurrentContextPath().toUriString()+"/"+
+						URL(ServletUriComponentsBuilder.fromCurrentContextPath().toUriString()+"/r/"+
 								user.getName()+"/"+this.urlConversionService.encode(url.getId())));
 			} catch (MalformedURLException e) {
 				return null;
