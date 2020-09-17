@@ -16,13 +16,14 @@ public class RedirectController {
 	@Autowired
 	private UrlService urlService;
 	
-	@GetMapping("/{username}/{pathName}")
-	public RedirectView getUserOriginalUrl(@PathVariable String username, @PathVariable String pathName){
-		return new RedirectView(this.urlService.getOriginalUrl(username,pathName));
+	@GetMapping("/{groupname}/{pathname}")
+	public RedirectView getUserOriginalUrl(@PathVariable String groupname, @PathVariable String pathname){
+		return new RedirectView(this.urlService.getOriginalUrl(groupname,pathname));
 	}
 	
-	@GetMapping("/{pathName}")
-	public RedirectView getOriginalUrl(@PathVariable String pathName){
-		return new RedirectView(this.urlService.getOriginalUrl(pathName));
+	@GetMapping("/{pathname}")
+	public RedirectView getOriginalUrl(@PathVariable String pathname){
+		return new RedirectView(this.urlService.getOriginalUrl(pathname));
 	}
+
 }

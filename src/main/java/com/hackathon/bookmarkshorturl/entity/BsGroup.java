@@ -43,7 +43,7 @@ public class BsGroup {
 	private Set<Url> urls;
 	
 	@ManyToMany
-	private Set<User> user;
+	private Set<User> users;
 
 	public long getId() {
 		return id;
@@ -111,11 +111,11 @@ public class BsGroup {
 	}
 
 	public Set<User> getUser() {
-		return user;
+		return users;
 	}
 
 	public void setUser(Set<User> user) {
-		this.user = user;
+		this.users = user;
 	}
 	
 }

@@ -1,6 +1,8 @@
 package com.hackathon.bookmarkshorturl.service.iml;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -75,7 +77,14 @@ public class BsGroupServiceImpl implements BsGroupService {
 	public void addUrlToGroup(String groupname, String shortUrl) {
 		BsGroup group = this.bsGroupRepository.findByGroupName(groupname);
 		Url url = this.urlService.getUrlById(this.urlConversionService.decode(shortUrl.substring(shortUrl.lastIndexOf('/')+1)));
+		url.setExpirationDateTime(null);
+		this.urlService.save(url);
 		group.getUrls().add(url);
 		this.bsGroupRepository.save(group);
+	}
+	
+	@Override
+	public Set<BsGroup> getGroupsByUser(User user){
+		return this.bsGroupRepository.findByUsersIn(Arrays.asList(user));
 	}
 }

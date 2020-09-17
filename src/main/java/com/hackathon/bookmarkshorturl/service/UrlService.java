@@ -21,4 +21,6 @@ public interface UrlService {
 
 	Url getUrlById(long id);
 
+	void save(Url url);
+
 }
