@@ -33,3 +33,6 @@ By this application we can create shorturls and share them within teams.
 - Team: To add a user to a group (once user login to this app, they will get added into system and we can then add them to some group)
 - Create Short Url: To create short urls
 - Urls: To view urls
+
+### Swagger url
+http://localhost:8080/swagger-ui.html
