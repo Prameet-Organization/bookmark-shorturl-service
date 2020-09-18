@@ -30,6 +30,6 @@ By this application we can create shorturls and share them within teams.
 - Click on log in with github button
 - There are 4 tabs
 - Group: For creation of tribe and feature team
-- Team: To add a user to a group
+- Team: To add a user to a group (once user login to this app, they will get added into system and we can then add them to some group)
 - Create Short Url: To create short urls
 - Urls: To view urls
