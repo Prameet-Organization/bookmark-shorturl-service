@@ -7,9 +7,9 @@ By this application we can create shorturls and share them within teams.
   - Node Js
   - Maven
 
-## Modules:
-    Backend: https://github.com/prameetpradhan/bookmark-shorturl-service/blob/master/README.md
-    Frontend: https://github.com/prameetpradhan/bookmark-shorturl-client/blob/master/README.md
+## Modules: (latest in master)
+    Backend: https://github.com/prameetpradhan/bookmark-shorturl-service
+    Frontend: https://github.com/prameetpradhan/bookmark-shorturl-client
     
 ## Run modules
 ### Backend
