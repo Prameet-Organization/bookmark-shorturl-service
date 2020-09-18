@@ -24,3 +24,12 @@ By this application we can create shorturls and share them within teams.
 ### Frontend
     - npm install
     - ng serve
+    
+# How to use:
+- launch application : http://localhost:4200
+- Click on log in with github button
+- There are 4 tabs
+- Group: For creation of tribe and feature team
+- Team: To add a user to a group
+- Create Short Url: To create short urls
+- Urls: To view urls
