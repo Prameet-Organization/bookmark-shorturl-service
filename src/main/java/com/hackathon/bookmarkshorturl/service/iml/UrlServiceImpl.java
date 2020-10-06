@@ -42,6 +42,7 @@ public class UrlServiceImpl implements UrlService {
 	
     @Override
 	public String convertToShortUrl(Url urlObj) {
+		System.out.println("Check");
     	urlObj.setCreator(this.userService.getUser());
     	var entity = this.urlRepository.save(urlObj);
 
